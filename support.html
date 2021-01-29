@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Html Form</title>
+  </head>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+    </script>
+<style>
+small.footer__copyright {
+  margin-right:5px;
+  position:relative;
+  float:right;
+}
+.form-control {
+    width: 51%;
+}
+.bg-dark {
+    background-color: #007bff38!important;
+}
+.btn-success {
+    margin-left: 38px;
+}
+
+</style>
+  <body>
+   <!--Read Me: this is a simple form of (google form,Html,css,app script,js intregrated) in this form i have used google forms element id to parse response to google sheet,this give us power to validate and customize form as we desired . if you have any query can drop me msg shrestha.kedar@his-world.com/cedarcu@gmail.com-->
+    <div class="container">
+     <h1 class="text-success"></h1><br>
+      <h1 class="text-success rounded" text-decoration="underline">都市コード空港コード申請フォーム</h1><br>
+<div class="pos-f-t">
+<nav class="navbar navbar-dark bg-dark">
+    <h4 class="text-danger">注意事項</h4>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+    <div class="collapse show" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+            <span class="text-muted">
+                <pre class="text-danger">〇月曜～金曜（祝日除く）の15時までの申請は以下の対応となります。
+　15時以降の申請はプラス1営業日後の反映となります。
+　　バックオフィス・SFIDA：申請日の4営業日後
+　　チャレンジ：申請日の5営業日後
+　※申請数によっては登録にお時間を頂く場合がございます。
+　※緊急で登録が必要な場合は本社情報システム本部保守チーム（03-5908-2061）へご連絡ください。
+
+〇IATAに登録されているを確認のうえ申請してください。
+
+〇名称以外の変更を伴う場合は『備考』に変更内容の詳細を記載してください。
+                </pre>
+           </span>
+        </div>
+    </div>
+</div>
+      
+      <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe6Kep9Hcmvdkw6V9Hv3RY046iFRjypCCYnlM6QauY-6eA-3Q/formResponse" target="_self" method="POST" id="mG61Hd" class="text-info border shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="freebirdFormviewerViewFormCard exportFormCard">
+                <div class="section_default">
+                     <p class="text-danger">※全項目が必須でございます。</p>
+                      <label>申請者メールアドレス</label>
+                      <input type="text" name="entry.929231950" class="form-control" value="@his-world.com" ><br>
+                      <label>申請者氏名</label>
+                      <input class="form-control" name="entry.1149310623" required><br>
+                      <label >申請者所属部署</label>
+                      <input class="form-control"  name="entry.2491195" required><br>
+                        <label>依頼内容</label>
+                        <select class="form-control" name="entry.814938120" onChange="selectSection()" id="request_title" required>
+                          <option value="" disabled selected hidden>選択してください</option>
+                          <option>新規作成（都市＋空港）</option>
+                          <option>新規作成（都市）</option>
+                          <option>新規作成（空港）</option>
+                          <option>変更（都市＋空港）</option>
+                          <option>変更（都市）</option>
+                          <option>変更（空港）</option>
+                          <option>削除（都市＋空港）</option>
+                          <option>削除（都市）</option>
+                          <option>削除（空港）</option>
+                        </select><br>
+                      <label for="exampleInputEmail1">都市コード</label><br>
+                      <input class="form-control" name="entry.1949915834" maxlength="3" placeholder="例：NYC（半角3文字）" oninput="this.value = this.value.toUpperCase()">
+                  </div>
+                    <template id="temp">
+                      <div></div>
+                    </template>
+                        <div id="section"></div>
+                   <div>
+                        <label>その他</label>
+                        <input class="form-control" name="entry.1238498486">
+                    </div>
+                <br><br>
+                <button type="submit" class="btn btn-primary">登録</button><br>
+                        <small class="footer__copyright">Copyright © 2020 HIS Co.,Ltd. All Rights Reserved.</small>
+          </div>
+      </form>
+      </div>
+<!--     modal country code-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">国コード　→　国名日本語表記一覧。</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>
+<script>
+function selectSection() {
+  var req_title= document.getElementById("request_title").value;
+    document.getElementById("section").innerHTML='';
+    var myarray = [];
+//console.log(req_title);
+    if(req_title=== "新規作成（都市＋空港）"){
+            var myarray = [
+['ツアー方面コード','entry.1274195142',''],
+['GMT時差','entry.1357292456','例：-0500（半角4桁又は5桁）'],
+['サマータイムGMT時差','entry.432345476','例：例：-0100（半角4桁又は5桁）'],
+['国コード','entry.1976914669','例：USA（半角3文字）'],
+['国名（日本語表記）','entry.1380064105',''],
+['国名（英語表記）','entry.805252660','例：UNITED STATES OF AMERICA'],
+['都市名（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.1473344751','例：ニューヨーク'],
+['都市名（英語表記）','entry.171814735','例：NEW YORK'],
+['空港コード（IATA登録コード）','entry.616867150','例：JFK'],
+['空港名称（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.1594017916','例：Ｊ・Ｆ・ケネディ'],
+['空港名称（英語表記）','entry.1446971871',''],
+[]
+];
+    }
+    if(req_title=== "新規作成（都市）"){
+            var myarray = [
+['ツアー方面コード','entry.1274195142',''],
+['GMT時差','entry.1357292456','例：-0500（半角4桁又は5桁）'],
+['サマータイムGMT時差','entry.432345476','例：例：-0100（半角4桁又は5桁）'],
+['国コード','entry.1976914669','例：USA（半角3文字）'],
+['国名（日本語表記）','entry.1380064105',''],
+['国名（英語表記）','entry.805252660','例：UNITED STATES OF AMERICA'],
+['都市名（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.1473344751','例：ニューヨーク'],
+['都市名（英語表記）','entry.171814735','例：NEW YORK']
+,[]];
+    }
+    if(req_title=== "新規作成（空港）"){
+        var myarray = [
+['空港コード（IATA登録コード）','entry.616867150','例：JFK'],
+['空港名称（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.1594017916','例：Ｊ・Ｆ・ケネディ'],
+['空港名称（英語表記）','entry.1446971871','']
+,[]];
+        
+    }
+    if(req_title=== "変更（都市＋空港）"){
+            var myarray = [
+['変更前都市名（日本語表記）','entry.1960385113','例：ニューヨーク'],
+['変更後都市名（日本語表記）','entry.1473344751','例：ニューヨーク'],
+['変更前都市名（英語表記）','entry.541746003','例：NEW YORK'],
+['変更後都市名（英語表記）','entry.171814735','例：NEW YORK'],
+['空港コード（IATA登録コード）','entry.616867150','例：JFK'],
+['変更前空港名（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.526246850','例：Ｊ・Ｆ・ケネディ'],
+['変更後空港名（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.1594017916','例：Ｊ・Ｆ・ケネディ'],
+['変更前空港名（英語表記）','entry.249716980',''],
+['変更後空港名称（英語表記）','entry.1446971871','']
+,[]];
+    }
+    if(req_title=== "変更（都市）"){
+            var myarray = [
+['変更前都市名（日本語表記）','entry.1960385113','例：ニューヨーク'],
+['変更後都市名（日本語表記）','entry.1473344751',''],
+['変更前都市名（英語表記）','entry.541746003','例：NEW YORK'],
+['変更後都市名（英語表記）','entry.171814735','例：NEW YORK']
+,[]];
+    }
+    if(req_title=== "変更（空港）"){
+        var myarray = [
+['空港コード（IATA登録コード）','entry.616867150','例：JFK'],
+['変更前空港名称（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.526246850','例：Ｊ・Ｆ・ケネディ'],
+['変更後空港名称（日本語表記　※漢字の場合はカナ読みをカッコで併記）','entry.1594017916','例：Ｊ・Ｆ・ケネディ'],
+['変更前空港名（英語表記）','entry.249716980',''],
+['変更後空港名称（英語表記）','entry.1446971871','']
+,[]];
+    }
+    if(req_title=== "削除（都市＋空港）" || req_title=== "削除（空港）"){
+            var myarray = [['空港コード（IATA登録コード）','entry.616867150','例：JFK'],[]];
+    }
+    
+    decideSection(myarray);
+}
+
+//generate html by selected pull down option dynamically by array
+function decideSection(myarray) {
+  var temp, item, a, i;
+
+
+// loop the outer array
+    console.log(myarray.length);
+for (var i = 0; i < myarray.length; i++) {
+  //get the template element:
+  temp = document.getElementsByTagName("template")[0];
+  //get the DIV element from the template:
+  item = temp.content.querySelector("div");
+        a = document.importNode(item, true);
+//    console.log(myarray[i][0]);
+    //Create a new node, based on the template:
+
+    //Add data from the array:
+    if(myarray[i][0]==="ツアー方面コード"){
+        var tourlist = ["","A ：アメリカ 西海岸","B ：カリブ","C ：カナダ","D ：中南米","E ：ハワイ","F ：アジアシティ","G ：アジアビーチ","H ：ミクロネシア","I ：オセアニア","J ：南太平洋・インド洋","K ：ヨーロッパ","L ：中近東ボーダー","M ：アフリカ","N ：アジアボーダー","O ：中国・モンゴル","P：アメリカ 東海岸","Q ：フロリダ","R ：その他 アメリカ","Z ：その他"];
+        var tour_options_str = "";
+        tourlist.forEach( function(tour) {
+            tour_options_str += '<option value="' + tour + '">' + tour + '</option>';
+        });
+        item.innerHTML='<br><label>' + myarray[i][0] + '</label><select class="form-control" name="' + myarray[i][1] + '" id="' + myarray[i][1] + '" placeholder="'+myarray[i][2]+'" required>'+tour_options_str+'</select>';
+    }
+    
+    else if(myarray[i][0]==="国コード"){
+      var countryArray = [
+[""],
+["ABW　→　アルバ島　/　ARUBA"],
+["AFG　→　アフガニスタン　/　AFGHANISTAN"],
+["AGO　→　アンゴラ共和国　/　ANGOLA"],
+["AIA　→　アンギラ島　/　ANGUILLA"],
+["ALA　→　オーランド諸島　/　LAND ISLANDS"],
+["ALB　→　アルバニア　/　ALBANIA"],
+["AND　→　アンドラ公国　/　ANDORRA"],
+["ANT　→　オランダ領アンティル　/　NETHERLANDS ANTILLES"],
+["ARC　→　北極　/　Arctic"],
+["ARE　→　アラブ首長国連邦　/　UNITED ARAB EMIRATES"],
+["ARG　→　アルゼンチン　/　ARGENTINA"],
+["ARM　→　アルメニア　/　ARMENIA"],
+["ASM　→　アメリカンサモア　/　AMERICAN SAMOA"],
+["ATA　→　南極　/　ANTARCTICA"],
+["ATF　→　フランス南領土　/　FRENCH SOUTHERN TERRITORIES"],
+["ATG　→　アンティグア・バーブーダー　/　ANTIGUA AND BARBUDA"],
+["AUS　→　オーストラリア　/　AUSTRALIA"],
+["AUT　→　オーストリア　/　AUSTRIA"],
+["AZE　→　アゼルバイジャン　/　AZERBAIJAN"],
+["BDI　→　ブルンジ共和国　/　BURUNDI"],
+["BEL　→　ベルギー　/　BELGIUM"],
+["BEN　→　ベナン　/　BENIN"],
+["BES　→　BONAIRE, SAINT EUSTATIUS AND SABA　/　BONAIRE, SAINT EUSTATIUS AND SABA"],
+["BFA　→　ブルキナファッソ　/　BURKINA FASO"],
+["BGD　→　バングラデシュ　/　BANGLADESH"],
+["BGR　→　ブルガリア　/　BULGARIA"],
+["BHR　→　バーレーン国　/　BAHRAIN"],
+["BHS　→　バハマ　/　BAHAMAS"],
+["BIH　→　ボスニアヘルチエゴビナ　/　BOSNIA AND HERZEGOVINA"],
+["BLM　→　サン バルテルミー島　/　SAINT BARTHLEMY"],
+["BLR　→　ベラルーシ　/　BELARUS"],
+["BLZ　→　ベリーズ　/　BELIZE"],
+["BMU　→　バミューダ　/　BERMUDA"],
+["BOL　→　ボリビア　/　BOLIVIA, PLURINATIONAL STATE OF"],
+["BRA　→　ブラジル　/　BRAZIL"],
+["BRB　→　バルバドス　/　BARBADOS"],
+["BRN　→　ブルネイ・ダルサラ－ム国　/　BRUNEI DARUSSALAM"],
+["BTN　→　ブータン　/　BHUTAN"],
+["BVT　→　ブーヴェ島　/　BOUVET ISLAND"],
+["BWA　→　ボツワナ共和国　/　BOTSWANA"],
+["CAF　→　中央アフリカ共和国　/　CENTRAL AFRICAN REPUBLIC"],
+["CAN　→　カナダ　/　CANADA"],
+["CCK　→　ココス･キーリング群島　/　COCOS (KEELING) ISLANDS"],
+["CDF　→　※使用不可※　コンゴ民主共和国　⇒　CODに変更　/　DEMOCRATIC REPUBLIC Of THE CONGO COD"],
+["CHE　→　スイス　/　SWITZERLAND"],
+["CHL　→　チリ共和国　/　CHILE"],
+["CHN　→　中華人民共和国　/　CHINA"],
+["CIV　→　コートジボワール共和国　/　CTE D'IVOIRE"],
+["CMR　→　カメルーン　/　CAMEROON"],
+["COD　→　コンゴ民主共和国　/　DEMOCRATIC REPUBLIC Of THE CONGO"],
+["COG　→　コンゴ共和国　/　CONGO"],
+["COK　→　クック諸島　/　COOK ISLANDS"],
+["COL　→　コロンビア　/　COLOMBIA"],
+["COM　→　コモロ・イスラム連邦共和国　/　COMOROS"],
+["CPV　→　カーボ･ヴェルデ　/　CAPE VERDE"],
+["CRI　→　コスタリカ　/　COSTA RICA"],
+["CUB　→　キューバ　/　CUBA"],
+["CUW　→　キュラソー　/　Curacao"],
+["CXR　→　クリスマス・アイランド　/　CHRISTMAS ISLAND"],
+["CYM　→　CAYMAN ISLANDS　/　CAYMAN ISLANDS"],
+["CYP　→　キプロス共和国　/　CYPRUS"],
+["CZE　→　チェコ共和国　/　CZECH REPUBLIC"],
+["DEU　→　ドイツ　/　GERMANY"],
+["DJI　→　シブチ共和国　/　DJIBOUTI"],
+["DMA　→　ドミニカ共和国　/　DOMINICA"],
+["DNK　→　デンマーク　/　DENMARK"],
+["DOM　→　ドミニカ共和国　/　DOMINICAN REPUBLIC"],
+["DZA　→　アルジェリア　/　ALGERIA"],
+["ECU　→　エクアドル　/　ECUADOR"],
+["EGY　→　エジプト　/　EGYPT"],
+["ERI　→　エリトリア国　/　ERITREA"],
+["ESH　→　西サハラ　/　WESTERN SAHARA"],
+["ESP　→　スペイン　/　SPAIN"],
+["EST　→　エストニア　/　ESTONIA"],
+["ETH　→　エチオピア　/　ETHIOPIA"],
+["FIN　→　フィンランド　/　FINLAND"],
+["FJI　→　フィジー　/　FIJI"],
+["FLK　→　フォークランド諸島　/　FALKLAND ISLANDS (MALVINAS)"],
+["FRA　→　フランス共和国　/　FRANCE"],
+["FRO　→　ファロー群島　/　FAROE ISLANDS"],
+["FSM　→　ミクロネシアン連邦　/　MICRONESIA, FEDERATED STATES OF"],
+["GAB　→　ガボン共和国　/　GABON"],
+["GBR　→　イギリス　/　UNITED KINGDOM"],
+["GEO　→　ジョージア　/　GEORGIA"],
+["GGY　→　GUERNSEY　/　GUERNSEY"],
+["GHA　→　ガーナ共和国　/　GHANA"],
+["GIB　→　ジブラルタル　/　GIBRALTAR"],
+["GIN　→　ギニア共和国　/　GUINEA"],
+["GLP　→　グアデルーペ　/　GUADELOUPE"],
+["GMB　→　ガンビア共和国　/　GAMBIA"],
+["GNB　→　ギニア・ビサウ共和国　/　GUINEA-BISSAU"],
+["GNQ　→　赤道ギニア共和国　/　EQUATORIAL GUINEA"],
+["GRC　→　ギリシャ　/　GREECE"],
+["GRD　→　グレナダ　/　GRENADA"],
+["GRL　→　グリーンランド　/　GREENLAND"],
+["GTM　→　グアテマラ　/　GUATEMALA"],
+["GUF　→　ギアナ　/　FRENCH GUIANA"],
+["GUM　→　グアム　/　GUAM"],
+["GUY　→　ギアナ　/　GUYANA"],
+["HKG　→　香港　/　HONG KONG"],
+["HMD　→　ハードマクドナルド諸島　/　HEARD ISLAND AND MCDONALD ISLANDS"],
+["HND　→　ホンジュラス共和国　/　HONDURAS"],
+["HRV　→　クロアチア　/　CROATIA"],
+["HTI　→　ハイチ共和国　/　HAITI"],
+["HUN　→　ハンガリー　/　HUNGARY"],
+["IDN　→　インドネシア　/　INDONESIA"],
+["IMN　→　ISLE OF MAN　/　ISLE OF MAN"],
+["IND　→　インド　/　INDIA"],
+["IOT　→　イギリスインド洋領　/　BRITISH INDIAN OCEAN TERRITORY"],
+["IRL　→　アイルランド　/　IRELAND"],
+["IRN　→　イラン・イスラム共和国　/　IRAN, ISLAMIC REPUBLIC OF"],
+["IRQ　→　イラク　/　IRAQ"],
+["ISL　→　アイスランド　/　ICELAND"],
+["ISR　→　イスラエル　/　ISRAEL"],
+["ITA　→　イタリア　/　ITALY"],
+["JAM　→　ジャマイカ　/　JAMAICA"],
+["JEY　→　JERSEY　/　JERSEY"],
+["JOR　→　ヨルダン・ハシミテ王国　/　JORDAN"],
+["JPN　→　日本　/　JAPAN"],
+["KAZ　→　カザフスタン　/　KAZAKHSTAN"],
+["KEN　→　ケニア　/　KENYA"],
+["KGZ　→　キルギス　/　Kyrgyz Republic"],
+["KHM　→　カンボジア　/　CAMBODIA"],
+["KIR　→　キリバス共和国　/　KIRIBATI"],
+["KNA　→　SAINT KITTS AND NEVIS　/　SAINT KITTS AND NEVIS"],
+["KOR　→　大韓民国　/　KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"],
+["KWT　→　クウェート国　/　KUWAIT"],
+["LAO　→　ラオス人民民主共和国　/　LAO PEOPLE'S DEMOCRATIC REPUBLIC"],
+["LBN　→　レバノン　/　LEBANON"],
+["LBR　→　リベリア　/　LIBERIA"],
+["LBY　→　社会主義人民リビア・アラブ国　/　LIBYAN ARAB JAMAHIRIYA"],
+["LCA　→　セント・ルシア　/　SAINT LUCIA"],
+["LIE　→　リヒテンシュタイン公国　/　LIECHTENSTEIN"],
+["LKA　→　スリランカ　/　SRI LANKA"],
+["LSO　→　レント王国　/　LESOTHO"],
+["LTU　→　リトアニア共和国　/　LITHUANIA"],
+["LUX　→　ルクセンブルグ大公国　/　LUXEMBOURG"],
+["LVA　→　ラトビア　/　LATVIA"],
+["MAC　→　マカオ　/　MACAO"],
+["MAF　→　SAINT MARTIN (FRENCH PART)　/　SAINT MARTIN (FRENCH PART)"],
+["MAR　→　モロッコ　/　MOROCCO"],
+["MCO　→　モナコ　/　MONACO"],
+["MDA　→　モルドバ共和国　/　MOLDOVA, REPUBLIC OF"],
+["MDG　→　マダガスカル共和国　/　MADAGASCAR"],
+["MDV　→　モルディブ共和国　/　MALDIVES"],
+["MEX　→　メキシコ　/　MEXICO"],
+["MHL　→　マーシャル諸島共和国　/　MARSHALL ISLANDS"],
+["MKD　→　マケドニア・旧ユーゴスラビア共和国　/　MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF"],
+["MLI　→　マリ共和国　/　MALI"],
+["MLT　→　マルタ共和国　/　MALTA"],
+["MMR　→　ミャンマー　/　MYANMAR"],
+["MNE　→　モンテネグロ　/　Montenegro"],
+["MNG　→　モンゴル　/　MONGOLIA"],
+["MNP　→　北マリアナ諸島　/　NORTHERN MARIANA ISLANDS"],
+["MOZ　→　モザンビーク　/　MOZAMBIQUE"],
+["MRT　→　モーリタニア・イスラム共和国　/　MAURITANIA"],
+["MSR　→　モントセルラット　/　MONTSERRAT"],
+["MTQ　→　マルティニク　/　MARTINIQUE"],
+["MUS　→　モーリシャス共和国　/　MAURITIUS"],
+["MWI　→　マラウィ共和国　/　MALAWI"],
+["MYS　→　マレーシア　/　MALAYSIA"],
+["MYT　→　MAYOTTE　/　MAYOTTE"],
+["NAM　→　ナミビア共和国　/　NAMIBIA"],
+["NCL　→　ニューカレドニア　/　NEW CALEDONIA"],
+["NER　→　ニジェール共和国　/　NIGER"],
+["NFK　→　ノーフォーク島　/　NORFOLK ISLAND"],
+["NGA　→　ナイジェリア　/　NIGERIA"],
+["NIC　→　ニカラグア　/　NICARAGUA"],
+["NIU　→　ニウエ　/　NIUE"],
+["NLD　→　オランダ王国　/　NETHERLANDS"],
+["NOR　→　ノルウェイ王国　/　NORWAY"],
+["NPL　→　ネパール　/　NEPAL"],
+["NRU　→　ナウル共和国　/　NAURU"],
+["NZL　→　ニュージーランド　/　NEW ZEALAND"],
+["OMN　→　オマーン国　/　OMAN"],
+["PAK　→　パキスタン　/　PAKISTAN"],
+["PAN　→　パナマ　/　PANAMA"],
+["PCN　→　PITCAIRN　/　PITCAIRN"],
+["PER　→　ペルー　/　PERU"],
+["PHL　→　フィリピン　/　PHILIPPINES"],
+["PLW　→　パラオ共和国　/　PALAU"],
+["PNG　→　パプア・ニューギニア　/　PAPUA NEW GUINEA"],
+["POL　→　ポーランド　/　POLAND"],
+["PRI　→　プエルトリコ　/　PUERTO RICO"],
+["PRK　→　朝鮮民主主義人民共和国　/　KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"],
+["PRT　→　ポルトガル　/　PORTUGAL"],
+["PRY　→　パラグアイ　/　PARAGUAY"],
+["PSE　→　パレスチナ暫定自治区　/　PALESTINIAN TERRITORY, OCCUPIED"],
+["PSZ　→　※使用不可※　パレスチナ暫定自治区⇒PSE　/　=Not Use=PALESTINIAN TERRITORY, OCCUPIED"],
+["PYF　→　ポリネシア　/　FRENCH POLYNESIA"],
+["QAT　→　カタール国　/　QATAR"],
+["REU　→　レユニオン　/　RUNION"],
+["ROM　→　ルーマニア　/　ROMANIA"],
+["ROU　→　ルーマニア　/　Romania"],
+["RUS　→　ロシア連邦　/　RUSSIAN FEDERATION"],
+["RWA　→　ルワンダ　/　RWANDA"],
+["SAU　→　サウジアラビア　/　SAUDI ARABIA"],
+["SCG　→　セルビア・モンテネグロ　/　SERBIA AND MONTENEGRO"],
+["SDN　→　スーダン　/　SUDAN"],
+["SEN　→　セネガル　/　SENEGAL"],
+["SGP　→　シンガポール　/　SINGAPORE"],
+["SGS　→　サウスジョージア島／サウスサンドイッチ島　/　SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS"],
+["SHM　→　※使用停止　DUPEのためセントヘレナ島　/　SAINT HELENA"],
+["SHN　→　セントヘレナ島　/　SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA"],
+["SJM　→　SVALBARD AND JAN MAYEN　/　SVALBARD AND JAN MAYEN"],
+["SLB　→　ソロモン諸島　/　SOLOMON ISLANDS"],
+["SLE　→　シエラレオネ共和国　/　SIERRA LEONE"],
+["SLV　→　エル・サルバドル　/　EL SALVADOR"],
+["SMR　→　サン・マリノ　/　SAN MARINO"],
+["SOM　→　ソマリア　/　SOMALIA"],
+["SPM　→　サンピエールおよびミクェロン　/　SAINT PIERRE AND MIQUELON"],
+["SRB　→　セルビア　/　Serbia"],
+["SSD　→　南スーダン　/　South Sudan"],
+["STP　→　サントメ・プリンスぺ民主共和国　/　SAO TOME AND PRINCIPE"],
+["SUR　→　スリナム共和国　/　SURINAME"],
+["SVK　→　スロバキア　/　SLOVAKIA"],
+["SVN　→　スロベニア　/　SLOVENIA"],
+["SWE　→　スウェーデン　/　SWEDEN"],
+["SWZ　→　スワジランド王国　/　SWAZILAND"],
+["SXM　→　SINT MAARTEN (DUTCH PART)　/　SINT MAARTEN (DUTCH PART)"],
+["SYC　→　セイシェル共和国　/　SEYCHELLES"],
+["SYR　→　シリア・アラブ共和国　/　SYRIAN ARAB REPUBLIC"],
+["TCA　→　タークス・カイコス諸島　/　TURKS AND CAICOS ISLANDS"],
+["TCD　→　チャド共和国　/　CHAD"],
+["TGO　→　トーゴ共和国　/　TOGO"],
+["THA　→　タイ　/　THAILAND"],
+["TJK　→　タジキスタン　/　TAJIKISTAN"],
+["TKL　→　トケラウ諸島　/　TOKELAU"],
+["TKM　→　トルクメニスタン　/　TURKMENISTAN"],
+["TLS　→　東ティモール　/　TIMOR-LESTE"],
+["TMP　→　※使用不可※　東ティモール⇒TLS　/　=Not Use=TIMOR-LESTE"],
+["TON　→　トンガ　/　TONGA"],
+["TTD　→　トリニダッド・ドバゴ共和国　/　TRINIDAD AND TOBAGO"],
+["TTO　→　トリニダード・トバゴ諸島　/　TRINIDAD AND TOBAGO"],
+["TTT　→　TTTTT　/　TTTTT"],
+["TUN　→　チュニジア　/　TUNISIA"],
+["TUR　→　トルコ　/　TURKEY"],
+["TUV　→　ツバル　/　TUVALU"],
+["TWN　→　台湾　/　TAIWAN, PROVINCE OF CHINA"],
+["TZA　→　タンザニア連合共和国　/　TANZANIA, UNITED REPUBLIC OF"],
+["UGA　→　ウガンダ　/　UGANDA"],
+["UKR　→　ウクライナ　/　UKRAINE"],
+["UMI　→　UNITED STATES MINOR OUTLYING ISLANDS　/　UNITED STATES MINOR OUTLYING ISLANDS"],
+["URY　→　ウルグアイ　/　URUGUAY"],
+["USA　→　アメリカ　/　UNITED STATES"],
+["UZB　→　ウズベキスタン　/　UZBEKISTAN"],
+["VAT　→　バチカン市国　/　HOLY SEE (VATICAN CITY STATE)"],
+["VCT　→　セントビンセントおよびグレナディーン諸島　/　SAINT VINCENT AND THE GRENADINES"],
+["VEN　→　ベネズエラ　/　VENEZUELA, BOLIVARIAN REPUBLIC OF"],
+["VGB　→　ヴァージン諸島（英）　/　VIRGIN ISLANDS, BRITISH"],
+["VIR　→　ヴァージン諸島（米）　/　VIRGIN ISLANDS, U.S."],
+["VNM　→　ベトナム　/　VIET NAM"],
+["VUT　→　バヌアツ共和国　/　VANUATU"],
+["WLF　→　ウォリス・フツナ諸島　/　WALLIS AND FUTUNA"],
+["WSM　→　サモア　/　SAMOA"],
+["XKX　→　コソボ　/　REPUBLIC OF KOSOVO"],
+["YEM　→　イエメン共和国　/　YEMEN"],
+["YUG　→　ユーゴスラビア　/　FEDERAL REPUBLIC OF YUGOSLAVIA"],
+["ZAF　→　南アフリカ　/　SOUTH AFRICA"],
+["ZAR　→　ザイール　/　ZAIRE"],
+["ZMB　→　ザンビア　/　ZAMBIA"],
+["ZWE　→　ジンバブエ　/　ZIMBABWE"]
+       ];
+            var country_options_str = "";
+            countryArray.forEach( function(item) {
+            country_options_str += '<option value = "' + item + '">' + item + '</option>';
+        });
+          item.innerHTML='<br><div class="form-inline"><label>' + myarray[i][0] + '</label><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">一覧から設定する？</button></div><br><input class="form-control" name="' + myarray[i][1] + '" id="' + myarray[i][1] + '" placeholder="'+myarray[i][2]+'" required>';
+        //generate html and append options
+        var modalBody = document.getElementById("modal-body");
+        modalBody.innerHTML='<label>選択してください。</label><br><select class="form-control"  onChange="getPulldownValueModal(event)"">'+ country_options_str +'</select>';
+    }
+    else if(myarray[i][0]==="空港コード（IATA登録コード）"){
+        item.innerHTML='<br><div class="form-inline"><label>' + myarray[i][0] + '</label><a href="https://www.iata.org/en/publications/directories/code-search/" target="_blank">　IATA登録コード検索&#x1f517</a></div><br><input class="form-control" name="' + myarray[i][1] + '" id="' + myarray[i][1] + '" placeholder="'+myarray[i][2]+'" >' ;
+    } else {
+        item.innerHTML='<br><label>' + myarray[i][0] + '</label><input class="form-control" name="' + myarray[i][1] + '" id="' + myarray[i][1] + '" placeholder="'+myarray[i][2]+'" required>';
+    }
+
+    console.log(myarray[i][0]);
+    //append the new node wherever you like:
+    document.getElementById("section").appendChild(a);
+
+    }
+    document.getElementById("temp").innerHTML='<div></div>';
+}
+    
+//get country and country name from modal pull down and set in form value
+function getPulldownValueModal(e) {
+    var coutryCodeName = document.getElementById("entry.1380064105").value = e.target.value;
+    document.getElementById("entry.1976914669").value = coutryCodeName.substring(0,3);
+    document.getElementById("entry.1380064105").value = coutryCodeName.split('　→　').pop().split('　/　')[0];
+    document.getElementById("entry.805252660").value = coutryCodeName.substring(coutryCodeName.lastIndexOf("/　")+2);
+}
+</script>
